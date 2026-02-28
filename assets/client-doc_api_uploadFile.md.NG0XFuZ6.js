@@ -1,0 +1,15 @@
+import{_ as t,c as s,o as n,ae as e}from"./chunks/framework.Dh1jimFm.js";const h=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"client-doc/api/uploadFile.md","filePath":"client-doc/api/uploadFile.md","lastUpdated":1770358354000}'),p={name:"client-doc/api/uploadFile.md"};function l(i,a,o,c,d,r){return n(),s("div",null,a[0]||(a[0]=[e(`<h4 id="文件上传" tabindex="-1">文件上传 <a class="header-anchor" href="#文件上传" aria-label="Permalink to &quot;文件上传&quot;">​</a></h4><p><strong>接口地址：</strong> <code>POST /upload</code></p><p><strong>请求头：</strong></p><p>text</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>Content-Type: multipart/form-data</span></span>
+<span class="line"><span>Authorization: Bearer {token}</span></span></code></pre></div><p><strong>请求参数：</strong></p><table tabindex="0"><thead><tr><th style="text-align:left;">参数名</th><th style="text-align:left;">类型</th><th style="text-align:left;">必填</th><th style="text-align:left;">说明</th></tr></thead><tbody><tr><td style="text-align:left;">file</td><td style="text-align:left;">file</td><td style="text-align:left;">是</td><td style="text-align:left;">上传的文件</td></tr></tbody></table><p><strong>响应示例：</strong></p><p>json</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>{</span></span>
+<span class="line"><span>  &quot;code&quot;: 200,</span></span>
+<span class="line"><span>  &quot;message&quot;: &quot;上传成功&quot;,</span></span>
+<span class="line"><span>  &quot;data&quot;: {</span></span>
+<span class="line"><span>    &quot;id&quot;: &quot;1&quot;,</span></span>
+<span class="line"><span>    &quot;fileName&quot;: &quot;contract.pdf&quot;,</span></span>
+<span class="line"><span>    &quot;fileSize&quot;: 2048576,</span></span>
+<span class="line"><span>    &quot;fileUrl&quot;: &quot;https://minio.enfi.com/default/contract.pdf&quot;,</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div><h4 id="配置说明" tabindex="-1">配置说明 <a class="header-anchor" href="#配置说明" aria-label="Permalink to &quot;配置说明&quot;">​</a></h4><p>配置申请的minio信息 application.yml</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>minio:</span></span>
+<span class="line"><span>    url: http://ip:port</span></span>
+<span class="line"><span>    accessKey: ak</span></span>
+<span class="line"><span>    secretKey: sk</span></span>
+<span class="line"><span>    bucketName: enfi-bucketName</span></span></code></pre></div>`,13)]))}const g=t(p,[["render",l]]);export{h as __pageData,g as default};

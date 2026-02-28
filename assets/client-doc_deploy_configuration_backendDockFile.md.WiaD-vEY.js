@@ -1,0 +1,51 @@
+import{_ as n,c as s,o as p,ae as e}from"./chunks/framework.Dh1jimFm.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"client-doc/deploy/configuration/backendDockFile.md","filePath":"client-doc/deploy/configuration/backendDockFile.md","lastUpdated":1770358354000}'),l={name:"client-doc/deploy/configuration/backendDockFile.md"};function i(c,a,t,o,r,d){return p(),s("div",null,a[0]||(a[0]=[e(`<h4 id="dockerfile-后端" tabindex="-1">Dockerfile（后端） <a class="header-anchor" href="#dockerfile-后端" aria-label="Permalink to &quot;Dockerfile（后端）&quot;">​</a></h4><p>dockerfile</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span># 构建阶段</span></span>
+<span class="line"><span>FROM maven:3.8-openjdk-17 AS builder</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>WORKDIR /app</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 复制Maven配置文件</span></span>
+<span class="line"><span>COPY pom.xml .</span></span>
+<span class="line"><span>COPY mvnw .</span></span>
+<span class="line"><span>COPY .mvn .mvn</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 下载依赖（利用Docker缓存层）</span></span>
+<span class="line"><span>RUN mvn dependency:go-offline -B</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 复制源代码</span></span>
+<span class="line"><span>COPY src src</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 构建应用</span></span>
+<span class="line"><span>RUN mvn clean package -DskipTests</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 运行阶段</span></span>
+<span class="line"><span>FROM openjdk:17-jdk-slim</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 设置时区</span></span>
+<span class="line"><span>RUN apt-get update &amp;&amp; apt-get install -y tzdata &amp;&amp; \\</span></span>
+<span class="line"><span>    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; \\</span></span>
+<span class="line"><span>    echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; \\</span></span>
+<span class="line"><span>    rm -rf /var/lib/apt/lists/*</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 创建应用用户</span></span>
+<span class="line"><span>RUN groupadd -r appuser &amp;&amp; useradd -r -g appuser appuser</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>WORKDIR /app</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 复制构建产物</span></span>
+<span class="line"><span>COPY --from=builder /app/target/*.jar app.jar</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 创建日志目录并设置权限</span></span>
+<span class="line"><span>RUN mkdir -p /app/logs &amp;&amp; chown -R appuser:appuser /app</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 切换用户</span></span>
+<span class="line"><span>USER appuser</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 暴露端口</span></span>
+<span class="line"><span>EXPOSE 9401</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 健康检查</span></span>
+<span class="line"><span>HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\</span></span>
+<span class="line"><span>  CMD curl -f http://localhost:9401/actuator/health || exit 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 启动命令</span></span>
+<span class="line"><span>ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;app.jar&quot;]</span></span></code></pre></div><h4 id="" tabindex="-1"><a class="header-anchor" href="#" aria-label="Permalink to &quot;&quot;">​</a></h4>`,4)]))}const h=n(l,[["render",i]]);export{u as __pageData,h as default};

@@ -1,0 +1,40 @@
+import{_ as s,c as a,o as p,ae as e}from"./chunks/framework.Dh1jimFm.js";const h=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"client-doc/deploy/configuration/frontnginx.md","filePath":"client-doc/deploy/configuration/frontnginx.md","lastUpdated":1770358354000}'),l={name:"client-doc/deploy/configuration/frontnginx.md"};function i(t,n,o,r,c,d){return p(),a("div",null,n[0]||(n[0]=[e(`<h4 id="nginx-conf-前端" tabindex="-1">nginx.conf（前端） <a class="header-anchor" href="#nginx-conf-前端" aria-label="Permalink to &quot;nginx.conf（前端）&quot;">​</a></h4><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>worker_processes  1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>events {</span></span>
+<span class="line"><span>    worker_connections  1024;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>http {</span></span>
+<span class="line"><span>    include       mime.types;</span></span>
+<span class="line"><span>    default_type  application/octet-stream;</span></span>
+<span class="line"><span>    sendfile        on;</span></span>
+<span class="line"><span>    keepalive_timeout  65;</span></span>
+<span class="line"><span>    server {</span></span>
+<span class="line"><span>        listen       80;</span></span>
+<span class="line"><span>        server_name  localhost;</span></span>
+<span class="line"><span>        client_max_body_size 1024m;</span></span>
+<span class="line"><span>        # 根路径 - 前端静态文件</span></span>
+<span class="line"><span>        location / {</span></span>
+<span class="line"><span>            root   /home/workRun/projects/workRun-ui;</span></span>
+<span class="line"><span>            try_files $uri $uri/ /index.html;</span></span>
+<span class="line"><span>            index  index.html index.htm;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        location /dev-api {</span></span>
+<span class="line"><span>            proxy_pass http://10.10.11.49:30300/;</span></span>
+<span class="line"><span>            # 代理头信息</span></span>
+<span class="line"><span>            proxy_set_header Host $http_host;</span></span>
+<span class="line"><span>            proxy_set_header X-Real-IP $remote_addr;</span></span>
+<span class="line"><span>            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span></span>
+<span class="line"><span>            proxy_set_header X-Forwarded-Proto $scheme;</span></span>
+<span class="line"><span>            proxy_set_header X-Forwarded-Host $host;</span></span>
+<span class="line"><span>            proxy_set_header X-Forwarded-Port $server_port;</span></span>
+<span class="line"><span>            proxy_set_header Connection &quot;&quot;;</span></span>
+<span class="line"><span>            proxy_http_version 1.1;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        # 错误页面</span></span>
+<span class="line"><span>        error_page   500 502 503 504  /50x.html;</span></span>
+<span class="line"><span>        location = /50x.html {</span></span>
+<span class="line"><span>            root   html;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}# requirepass 123456</span></span></code></pre></div>`,2)]))}const x=s(l,[["render",i]]);export{h as __pageData,x as default};
